@@ -1,16 +1,24 @@
 import React from 'react';
 import './App.css'
+import unsplas from '../api/unsplash';
 import SearchBar from './SearchBar';
 
 class App extends React.Component{
-   onSearchSubmit(term){
-        console.log(term);
+  state = {images: [] };
+  
+     onSearchSubmit= async (term) =>{
+     const response  = await unsplashs.get('/search/photos',{
+       params:{query: term} 
+       });
+
+       this.setState({images:response.data.results});
    }
    
     render(){
     return (
         <div className="ui container" id="searchbar" >
             <SearchBar onSubmit={this.onSearchSubmit} />
+            Found:{this.state.images.length} images
         </div>
     );
 }};
