@@ -1,13 +1,14 @@
 import React from 'react';
 import './App.css'
-import unsplas from '../api/unsplash';
+import unsplash from '../api/unsplash';
 import SearchBar from './SearchBar';
+import ImageList from './ImageList';
 
 class App extends React.Component{
   state = {images: [] };
   
      onSearchSubmit= async (term) =>{
-     const response  = await unsplashs.get('/search/photos',{
+     const response  = await unsplash.get('/search/photos',{
        params:{query: term} 
        });
 
@@ -18,7 +19,7 @@ class App extends React.Component{
     return (
         <div className="ui container" id="searchbar" >
             <SearchBar onSubmit={this.onSearchSubmit} />
-            Found:{this.state.images.length} images
+           <ImageList images={this.state.images} />
         </div>
     );
 }};
